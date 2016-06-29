@@ -38,9 +38,9 @@
 
     $ sudo node homeMeter.js --localServerPort=3000
     
-Для сохранения значений между запусками необходимо указать имя dump-файла:
+Для работы с единым файлом конфигурации можно использовать параметр _--с_
 
-    $ sudo node homeMeter.js --localServerPort=3000 --dumpFile=dump.json
+    $ sudo node homeMeter.js --c=config.json
 
 ![console](https://cloud.githubusercontent.com/assets/147685/16465198/282f3ea8-3e46-11e6-86c8-86bbb7439d54.png)
 

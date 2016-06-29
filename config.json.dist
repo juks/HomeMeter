@@ -1,0 +1,11 @@
+{
+  "dumpFile":        "dump.json",
+  "localServerPort": 3000,
+  "vv":              true,
+  "subPguMos":    {
+                        "username": "ivanov",
+                        "password": "ivanovRocks",
+                        "payerId": 1234567890,
+                        "flatNumber": 100
+                      }
+}

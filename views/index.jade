@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  p Текущие измерения
+
+  each module in publishedModules
+    div
+      - var measure = module.getMeasure()
+      div= module.title + ': ' + measure + ' (' + module.unitTitle + ')'
+      a(href='#', onclick="removeClass(document.getElementById('update-" + module.alias + "'), 'hidden')") Установить
+      div(id="update-" + module.alias class="hidden")
+        form(method='post', action='/setMeter')
+          input(name='alias', value=module.alias, type='hidden')
+          input(name='value', value=measure, type='text')
+          input(name='submit', value='Установить', type='submit')
+      div
+        if module.submitter
+          form(method='post', action='/submitMeasure')
+            input(name='alias', value=module.alias, type='hidden')
+            input(name='submit', value='Отправить в ' + module.submitter.title, type='submit')
+        if module.submitResult
+          div= module.submitResult.date + ': ' + module.submitResult.message

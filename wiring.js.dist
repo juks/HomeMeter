@@ -1,0 +1,16 @@
+var gpio = require('rpi-gpio');
+
+exports.pins = {
+            12: {
+                  type:      'water',
+                  kind:      'hot',
+                  alias:     'water_hot',
+                  title:     'Горячая вода',
+                  unitTitle: 'Кубометры',
+                  pinMode:   gpio.DIR_IN,
+                  edgeMode:  gpio.EDGE_RISING,
+                  weight:    10,
+                  delimiter: 1000,
+                  submitter: 'pguMos'
+                }
+}

@@ -4,6 +4,11 @@ var winston = require('winston');
 var helpers = require('./lib/helpers');
 var argv    = require('minimist')(process.argv.slice(2));
 
+if (!fs.existsSync('wiring.js')) {
+  console.log('Failed to locate wiring.js (Use wiring.js.dist as an example)');
+  process.exit(0);
+}
+
 var wiring = require('./wiring.js');
 
 // Available runtime parameters configuration
@@ -139,8 +144,14 @@ for (var pin in wiring.pins) {
   wiring.pins[pin].module = module;
   if (wiring.pins[pin].submitter) {
     var idx = 'sub' + wiring.pins[pin].submitter.charAt(0).toUpperCase() + wiring.pins[pin].submitter.slice(1);
-    var submitterConfig = c[idx];
-    module.submitter = new (require('./lib/submitters/' + wiring.pins[pin].submitter))(module, submitterConfig);
+
+    // Check for submitter
+    if (c && c.hasOwnProperty(idx)) {
+      var submitterConfig = c[idx];
+      module.submitter = new (require('./lib/submitters/' + wiring.pins[pin].submitter))(module, submitterConfig);
+    } else {
+      module.submitter = false;
+    }
   }
 
   publishedModules[wiring.pins[pin].alias] = module;

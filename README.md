@@ -1,2 +1,2 @@
 # home-meter
-Raspberry PI node.js application to collect and submit home meters measurements
+Raspberry PI node.js application that collects and submits home meters measurements
